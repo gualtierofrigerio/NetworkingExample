@@ -10,8 +10,25 @@ import Foundation
 
 struct Album:Codable {
     var id:Int
-    var title:String?
-    var userId:Int?
+    var title:String
+    var userId:Int
+    
+    var pictures:[Picture]?
+    
+    mutating func addPicture(_ picture:Picture) {
+        if pictures == nil {
+            pictures = [Picture]()
+        }
+        pictures?.append(picture)
+    }
+}
+
+struct Picture:Codable {
+    var id:Int
+    var albumId:Int
+    var title:String
+    var url:String
+    var thumbnailUrl:String
 }
 
 struct User:Codable {
@@ -19,10 +36,22 @@ struct User:Codable {
     var email:String
     var name:String
     var username:String
+    
+    var albums:[Album]?
+    
+    mutating func addAlbum(_ album:Album) {
+        if albums == nil {
+            albums = [Album]()
+        }
+        albums?.append(album)
+    }
 }
 
 protocol DataSource {
-    func getUsers(completion: @escaping ([User]?) -> Void)
-    func getUsers() -> Promise<[User]>
     func getAlbums() -> Promise<[Album]>
+    func getUsers(completion: @escaping ([User]?) -> Void)
+    func getPictures() -> Promise<[Picture]>
+    func getUsers() -> Promise<[User]>
+    
+    func getUsersWithMergedData() -> Promise<[User]>
 }
