@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  NetworkingExample
+
+  Created by Gualtiero Frigerio on 16/04/2019.
+  Copyright © 2019 Gualtiero Frigerio. All rights reserved.
+*/
+
+"NetworkError" = "A network error has occurred";
+"WrongURLError" = "Wrong URL";
+"DecodingError" = "An error occurred while decoding JSON data";
