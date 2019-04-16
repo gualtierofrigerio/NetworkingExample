@@ -12,38 +12,34 @@ class ViewController: UIViewController {
 
     let baseURL = "https://jsonplaceholder.typicode.com"
     let restClient = RESTHandler()
+    var dataSource:DataSource!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource = DataHandler(withBaseURL: baseURL, restClient: restClient)
         // Do any additional setup after loading the view, typically from a nib.
-        getUsers()
-        getUsersWithPromise()
-        getAlbums()
+        //getUsers()
+        //getUsersWithPromise()
+        //getAlbums()
+        getUserWithMergedData()
     }
     
     func getAlbums() {
-        let dataSource = DataHandler(withBaseURL: baseURL, restClient: restClient)
         let promiseAlbums = dataSource.getAlbums()
         promiseAlbums.observe { (returnUsers) in
             switch returnUsers {
             case .value(let albums):
                 print("----- getAlbums -----")
                 for album in albums {
-                    if let title = album.title {
-                        print("album title = \(title)")
-                    }
-                    else {
-                        print("album with id \(album.id) has no title")
-                    }
+                    print("album title = \(album.title)")
                 }
             case .error(let err):
-                print("error \(err)")
+                print("error \(err.localizedDescription)")
             }
         }
     }
     
     func getUsers() {
-        let dataSource = DataHandler(withBaseURL: baseURL, restClient: restClient)
         dataSource.getUsers { (users) in
             guard let users = users else {
                 return
@@ -55,8 +51,21 @@ class ViewController: UIViewController {
         }
     }
     
+    func getUserWithMergedData() {
+        dataSource.getUsersWithMergedData().observe { promiseReturn in
+            switch promiseReturn {
+            case .value(let users):
+                print("---- users with merged data ----")
+                for user in users {
+                    self.printUser(user)
+                }
+            case .error(let error):
+                 print("error \(error)")
+            }
+        }
+    }
+    
     func getUsersWithPromise() {
-        let dataSource = DataHandler(withBaseURL: baseURL, restClient: restClient)
         let promiseUsers = dataSource.getUsers()
         promiseUsers.observe { (returnUsers) in
             switch returnUsers {
@@ -72,3 +81,20 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK - Private
+
+extension ViewController {
+    func printUser(_ user:User) {
+        print("user name = \(user.username)")
+        if let albums = user.albums {
+            for album in albums {
+                print("album with title \(album.title)")
+                if let pictures = album.pictures {
+                    for picture in pictures {
+                        print("picture url \(picture.url)")
+                    }
+                }
+            }
+        }
+    }
+}

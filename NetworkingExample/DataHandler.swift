@@ -10,7 +10,7 @@ import Foundation
 
 enum EntityEndpoint:String {
     case Albums = "/albums"
-    case Pictures = "/pictures"
+    case Pictures = "/photos"
     case Users = "/users"
 }
 
@@ -31,6 +31,10 @@ extension DataHandler : DataSource {
         return getDataWithPromise(forEntityEndpoint: .Albums, withType: [Album].self)
     }
     
+    func getPictures() -> Promise<[Picture]> {
+        return getDataWithPromise(forEntityEndpoint: .Pictures, withType: [Picture].self)
+    }
+    
     func getUsers(completion: @escaping (([User]?) -> Void)) {
         getData(forEntityEndpoint: .Users, withType:[User].self) { (data) in
             let userData = data as? [User]
@@ -41,11 +45,60 @@ extension DataHandler : DataSource {
     func getUsers() -> Promise<[User]> {
         return getDataWithPromise(forEntityEndpoint: .Users, withType: [User].self)
     }
+    
+    func getUsersWithMergedData() -> Promise<[User]> {
+        return getPictures().then({self.addPicturesToAlbums($0)})
+                            .then({self.addAlbumsToUsers($0)})
+    }
 }
 
 // MARK: - Private
 
 extension DataHandler {
+    
+    private func addAlbumsToUsers(_ albums:[Album]) -> Promise<[User]> {
+        let usersPromise = Promise<[User]>()
+        getUsers().observe { promiseReturn in
+            switch promiseReturn {
+            case .value(let users):
+                var usersWithAlbums = [User]()
+                for var user in users {
+                    for album in albums {
+                        if album.userId == user.id {
+                            user.addAlbum(album)
+                        }
+                    }
+                    usersWithAlbums.append(user)
+                }
+                usersPromise.resolve(value: usersWithAlbums)
+            case .error(let error):
+                usersPromise.reject(error: error)
+            }
+        }
+        return usersPromise
+    }
+    
+    private func addPicturesToAlbums(_ pictures:[Picture]) -> Promise<[Album]> {
+        let albumsPromise = Promise<[Album]>()
+        getAlbums().observe { promiseReturn in
+            switch promiseReturn {
+            case .value(let albums):
+                var albumsWithPictures = [Album]()
+                for var album in albums {
+                    for picture in pictures {
+                        if picture.albumId == album.id {
+                            album.addPicture(picture)
+                        }
+                    }
+                    albumsWithPictures.append(album)
+                }
+                albumsPromise.resolve(value: albumsWithPictures)
+            case .error(let error):
+                albumsPromise.reject(error: error)
+            }
+        }
+        return albumsPromise
+    }
     
     private func decodeData<T>(data:Data, type:T.Type) -> Decodable? where T:Decodable {
         let decoder = JSONDecoder()
@@ -65,7 +118,7 @@ extension DataHandler {
             newPromise.resolve(value: decodedData as! T)
         }
         else {
-            newPromise.reject(error: self.makeError())
+            newPromise.reject(error: DatasourceErrors.decodingError)
         }
         return newPromise
     }
@@ -87,10 +140,10 @@ extension DataHandler {
     
     private func getDataWithPromise<T>(forEntityEndpoint: EntityEndpoint, withType type:T.Type) -> Promise<T> where T:Decodable {
         var promise:Promise<T>
-        guard let url = getUrl(forEntityEndpoint: .Users),
+        guard let url = getUrl(forEntityEndpoint: forEntityEndpoint),
               let restClient = restClient else {
             promise = Promise<T>()
-            promise.reject(error: makeError())
+            promise.reject(error: DatasourceErrors.wrongURL)
             return promise
         }
         
@@ -103,9 +156,5 @@ extension DataHandler {
         guard let baseURLString = baseURLString else {return nil}
         let urlString = baseURLString + forEntityEndpoint.rawValue
         return URL(string: urlString)
-    }
-    
-    private func makeError() -> Error {
-        return NSError(domain: "", code: 0, userInfo: nil)
     }
 }
