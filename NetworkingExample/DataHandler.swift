@@ -8,12 +8,6 @@
 
 import Foundation
 
-enum EntityEndpoint:String {
-    case Albums = "/albums"
-    case Pictures = "/photos"
-    case Users = "/users"
-}
-
 class DataHandler {
     
     private var baseURLString:String?
@@ -25,6 +19,8 @@ class DataHandler {
     }
 }
 
+// MARK: - DataSource
+
 extension DataHandler : DataSource {
     
     func getAlbums() -> Promise<[Album]> {
@@ -33,13 +29,6 @@ extension DataHandler : DataSource {
     
     func getPictures() -> Promise<[Picture]> {
         return getDataWithPromise(forEntityEndpoint: .Pictures, withType: [Picture].self)
-    }
-    
-    func getUsers(completion: @escaping (([User]?) -> Void)) {
-        getData(forEntityEndpoint: .Users, withType:[User].self) { (data) in
-            let userData = data as? [User]
-            completion(userData)
-        }
     }
     
     func getUsers() -> Promise<[User]> {
@@ -61,15 +50,7 @@ extension DataHandler {
         getUsers().observe { promiseReturn in
             switch promiseReturn {
             case .value(let users):
-                var usersWithAlbums = [User]()
-                for var user in users {
-                    for album in albums {
-                        if album.userId == user.id {
-                            user.addAlbum(album)
-                        }
-                    }
-                    usersWithAlbums.append(user)
-                }
+                let usersWithAlbums = DataSourceCommon.mergeUsers(users, withAlbums: albums)
                 usersPromise.resolve(value: usersWithAlbums)
             case .error(let error):
                 usersPromise.reject(error: error)
@@ -83,15 +64,7 @@ extension DataHandler {
         getAlbums().observe { promiseReturn in
             switch promiseReturn {
             case .value(let albums):
-                var albumsWithPictures = [Album]()
-                for var album in albums {
-                    for picture in pictures {
-                        if picture.albumId == album.id {
-                            album.addPicture(picture)
-                        }
-                    }
-                    albumsWithPictures.append(album)
-                }
+                let albumsWithPictures = DataSourceCommon.mergeAlbums(albums, withPictures: pictures)
                 albumsPromise.resolve(value: albumsWithPictures)
             case .error(let error):
                 albumsPromise.reject(error: error)
@@ -121,21 +94,6 @@ extension DataHandler {
             newPromise.reject(error: DatasourceErrors.decodingError)
         }
         return newPromise
-    }
-    
-    private func getData<T>(forEntityEndpoint: EntityEndpoint, withType type:T.Type, completion:@escaping (Decodable?) ->Void) where T:Decodable {
-        guard let url = getUrl(forEntityEndpoint: .Users) else {
-            completion(nil)
-            return
-        }
-        restClient?.getData(atURL: url, completion: { (data) in
-            guard let data = data else {
-                completion(nil)
-                return
-            }
-            let decodedData = self.decodeData(data: data, type:type)
-            completion(decodedData)
-        })
     }
     
     private func getDataWithPromise<T>(forEntityEndpoint: EntityEndpoint, withType type:T.Type) -> Promise<T> where T:Decodable {

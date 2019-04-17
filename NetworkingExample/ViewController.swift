@@ -13,17 +13,24 @@ class ViewController: UIViewController {
     let baseURL = "https://jsonplaceholder.typicode.com"
     let restClient = RESTHandler()
     var dataSource:DataSource!
+    var dataSourceCallbacks:DataSourceCallbacks!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = DataHandler(withBaseURL: baseURL, restClient: restClient)
+        dataSourceCallbacks = DataHandlerCallbacks(withBaseURL: baseURL, restClient: restClient)
         // Do any additional setup after loading the view, typically from a nib.
         //getUsers()
         //getUsersWithPromise()
         //getAlbums()
-        getUserWithMergedData()
+        //getUserWithMergedData()
+        getUserWithMergedDataCallbacks()
     }
-    
+}
+
+// MARK - Promise
+
+extension ViewController {
     func getAlbums() {
         let promiseAlbums = dataSource.getAlbums()
         promiseAlbums.observe { (returnUsers) in
@@ -39,18 +46,6 @@ class ViewController: UIViewController {
         }
     }
     
-    func getUsers() {
-        dataSource.getUsers { (users) in
-            guard let users = users else {
-                return
-            }
-            print("----- getUsers -----")
-            for user in users {
-                print("user name = \(user.username)")
-            }
-        }
-    }
-    
     func getUserWithMergedData() {
         dataSource.getUsersWithMergedData().observe { promiseReturn in
             switch promiseReturn {
@@ -60,7 +55,7 @@ class ViewController: UIViewController {
                     self.printUser(user)
                 }
             case .error(let error):
-                 print("error \(error)")
+                print("error \(error)")
             }
         }
     }
@@ -76,6 +71,32 @@ class ViewController: UIViewController {
                 }
             case .error(let err):
                 print("error \(err)")
+            }
+        }
+    }
+}
+
+// MARK - Callbacks
+
+extension ViewController {
+    
+    func getUsers() {
+        dataSourceCallbacks.getUsers { users in
+            guard let users = users else {
+                return
+            }
+            print("----- getUsers -----")
+            for user in users {
+                print("user name = \(user.username)")
+            }
+        }
+    }
+    
+    func getUserWithMergedDataCallbacks() {
+        dataSourceCallbacks.getUsersWithMergedData { users in
+            guard let users = users else {return}
+            for user in users {
+                self.printUser(user)
             }
         }
     }
