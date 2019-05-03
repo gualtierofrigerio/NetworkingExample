@@ -21,6 +21,7 @@
 		258F85C52265C4360042D63B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F85C42265C4360042D63B /* Errors.swift */; };
 		258F85C82265C7C60042D63B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 258F85C62265C7C60042D63B /* Localizable.strings */; };
 		258F85CB22671D1B0042D63B /* DataHandlerCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F85CA22671D1B0042D63B /* DataHandlerCallbacks.swift */; };
+		25AA26BF227AF7A000A958A4 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA26BE227AF7A000A958A4 /* UsersTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		258F85C72265C7C60042D63B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = NetworkingExample/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		258F85C92265C7CF0042D63B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = NetworkingExample/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		258F85CA22671D1B0042D63B /* DataHandlerCallbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandlerCallbacks.swift; sourceTree = "<group>"; };
+		25AA26BE227AF7A000A958A4 /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				258F85C42265C4360042D63B /* Errors.swift */,
 				256964A92260C26F00D6F61F /* Promise.swift */,
 				256964A3226081E900D6F61F /* RESTClient.swift */,
+				25AA26BE227AF7A000A958A4 /* UsersTableViewController.swift */,
 				2569647722607C7900D6F61F /* ViewController.swift */,
 				2569647922607C7900D6F61F /* Main.storyboard */,
 				2569647C22607C7B00D6F61F /* Assets.xcassets */,
@@ -281,6 +284,7 @@
 			files = (
 				2569647822607C7900D6F61F /* ViewController.swift in Sources */,
 				256964A4226081E900D6F61F /* RESTClient.swift in Sources */,
+				25AA26BF227AF7A000A958A4 /* UsersTableViewController.swift in Sources */,
 				258F85C52265C4360042D63B /* Errors.swift in Sources */,
 				256964A622608E2100D6F61F /* DataSource.swift in Sources */,
 				2569647622607C7900D6F61F /* AppDelegate.swift in Sources */,

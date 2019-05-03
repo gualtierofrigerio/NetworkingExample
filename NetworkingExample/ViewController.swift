@@ -26,6 +26,40 @@ class ViewController: UIViewController {
         //getUserWithMergedData()
         getUserWithMergedDataCallbacks()
     }
+    @IBAction func exampleButtonTap(_ sender: Any) {
+        dataSource.getUsersWithMergedData().observe { promiseReturn in
+            switch promiseReturn {
+            case .value(let users):
+                self.showUsers(users)
+            case .error(let error):
+                print("error \(error)")
+            }
+        }
+    }
+    
+    @IBAction func rxExampleButtonTap(_ sender: Any) {
+        dataSource.getUsersWithMergedData().observe { promiseReturn in
+            switch promiseReturn {
+            case .value(let users):
+                self.showUsersRx(users)
+            case .error(let error):
+                print("error \(error)")
+            }
+        }
+    }
+    
+    func showUsers(_ users:[User]) {
+        DispatchQueue.main.async {
+            let usersVC = UsersTableViewController()
+            usersVC.setUsers(users)
+            self.navigationController?.pushViewController(usersVC, animated: true)
+        }
+    }
+    
+    func showUsersRx(_ users:[User]) {
+        
+    }
+    
 }
 
 // MARK - Promise
