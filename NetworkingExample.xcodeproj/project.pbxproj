@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		253B92EE2282FBAC00A92483 /* UsersTableViewControllerRx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253B92ED2282FBAC00A92483 /* UsersTableViewControllerRx.swift */; };
+		253B92F02283165300A92483 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253B92EF2283165300A92483 /* UserViewController.swift */; };
+		253B92F222832B5000A92483 /* UserViewControllerRx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253B92F122832B5000A92483 /* UserViewControllerRx.swift */; };
 		2569647622607C7900D6F61F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2569647522607C7900D6F61F /* AppDelegate.swift */; };
 		2569647822607C7900D6F61F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2569647722607C7900D6F61F /* ViewController.swift */; };
 		2569647B22607C7900D6F61F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2569647922607C7900D6F61F /* Main.storyboard */; };
@@ -22,6 +25,7 @@
 		258F85C82265C7C60042D63B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 258F85C62265C7C60042D63B /* Localizable.strings */; };
 		258F85CB22671D1B0042D63B /* DataHandlerCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F85CA22671D1B0042D63B /* DataHandlerCallbacks.swift */; };
 		25AA26BF227AF7A000A958A4 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA26BE227AF7A000A958A4 /* UsersTableViewController.swift */; };
+		ABFF107EC6F1DBE572D800BD /* Pods_NetworkingExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9288D5E26665F5EF20AE1A51 /* Pods_NetworkingExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		253B92ED2282FBAC00A92483 /* UsersTableViewControllerRx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewControllerRx.swift; sourceTree = "<group>"; };
+		253B92EF2283165300A92483 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		253B92F122832B5000A92483 /* UserViewControllerRx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewControllerRx.swift; sourceTree = "<group>"; };
 		2569647222607C7900D6F61F /* NetworkingExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkingExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2569647522607C7900D6F61F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2569647722607C7900D6F61F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +71,9 @@
 		258F85C92265C7CF0042D63B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = NetworkingExample/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		258F85CA22671D1B0042D63B /* DataHandlerCallbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandlerCallbacks.swift; sourceTree = "<group>"; };
 		25AA26BE227AF7A000A958A4 /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
+		5BDDBDFC1E63257AEAD3A07B /* Pods-NetworkingExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetworkingExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample.debug.xcconfig"; sourceTree = "<group>"; };
+		9288D5E26665F5EF20AE1A51 /* Pods_NetworkingExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetworkingExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD47FB8E29005C93B6F022A7 /* Pods-NetworkingExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetworkingExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABFF107EC6F1DBE572D800BD /* Pods_NetworkingExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +110,8 @@
 				2569648922607C7B00D6F61F /* NetworkingExampleTests */,
 				2569649422607C7B00D6F61F /* NetworkingExampleUITests */,
 				2569647322607C7900D6F61F /* Products */,
+				5791C5F2BFFE5D387397DA19 /* Pods */,
+				EDCC72A26B022C381BFF8041 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +136,9 @@
 				256964A92260C26F00D6F61F /* Promise.swift */,
 				256964A3226081E900D6F61F /* RESTClient.swift */,
 				25AA26BE227AF7A000A958A4 /* UsersTableViewController.swift */,
+				253B92ED2282FBAC00A92483 /* UsersTableViewControllerRx.swift */,
+				253B92EF2283165300A92483 /* UserViewController.swift */,
+				253B92F122832B5000A92483 /* UserViewControllerRx.swift */,
 				2569647722607C7900D6F61F /* ViewController.swift */,
 				2569647922607C7900D6F61F /* Main.storyboard */,
 				2569647C22607C7B00D6F61F /* Assets.xcassets */,
@@ -150,6 +166,23 @@
 			path = NetworkingExampleUITests;
 			sourceTree = "<group>";
 		};
+		5791C5F2BFFE5D387397DA19 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5BDDBDFC1E63257AEAD3A07B /* Pods-NetworkingExample.debug.xcconfig */,
+				AD47FB8E29005C93B6F022A7 /* Pods-NetworkingExample.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EDCC72A26B022C381BFF8041 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9288D5E26665F5EF20AE1A51 /* Pods_NetworkingExample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,9 +190,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2569649A22607C7B00D6F61F /* Build configuration list for PBXNativeTarget "NetworkingExample" */;
 			buildPhases = (
+				AD12451CCA9829C9FD8850BA /* [CP] Check Pods Manifest.lock */,
 				2569646E22607C7900D6F61F /* Sources */,
 				2569646F22607C7900D6F61F /* Frameworks */,
 				2569647022607C7900D6F61F /* Resources */,
+				75167C754951A8AD66FD3322 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -277,14 +312,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		75167C754951A8AD66FD3322 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD12451CCA9829C9FD8850BA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NetworkingExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2569646E22607C7900D6F61F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				253B92EE2282FBAC00A92483 /* UsersTableViewControllerRx.swift in Sources */,
 				2569647822607C7900D6F61F /* ViewController.swift in Sources */,
 				256964A4226081E900D6F61F /* RESTClient.swift in Sources */,
+				253B92F02283165300A92483 /* UserViewController.swift in Sources */,
 				25AA26BF227AF7A000A958A4 /* UsersTableViewController.swift in Sources */,
+				253B92F222832B5000A92483 /* UserViewControllerRx.swift in Sources */,
 				258F85C52265C4360042D63B /* Errors.swift in Sources */,
 				256964A622608E2100D6F61F /* DataSource.swift in Sources */,
 				2569647622607C7900D6F61F /* AppDelegate.swift in Sources */,
@@ -472,6 +551,7 @@
 		};
 		2569649B22607C7B00D6F61F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BDDBDFC1E63257AEAD3A07B /* Pods-NetworkingExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -489,6 +569,7 @@
 		};
 		2569649C22607C7B00D6F61F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD47FB8E29005C93B6F022A7 /* Pods-NetworkingExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
