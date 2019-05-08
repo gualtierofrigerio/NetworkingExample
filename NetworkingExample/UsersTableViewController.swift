@@ -45,7 +45,8 @@ extension UsersTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let user = filteredUsers[indexPath.row]
+        showUser(user)
     }
 }
 
@@ -94,5 +95,11 @@ extension UsersTableViewController {
         }
         
         return cell
+    }
+    
+    private func showUser(_ user:User) {
+        let userVC = UserViewController()
+        userVC.setUser(user)
+        self.navigationController?.pushViewController(userVC, animated: true)
     }
 }
