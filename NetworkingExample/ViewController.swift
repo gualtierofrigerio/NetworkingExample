@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         //getUsersWithPromise()
         //getAlbums()
         //getUserWithMergedData()
-        getUserWithMergedDataCallbacks()
+        //getUserWithMergedDataCallbacks()
     }
     @IBAction func exampleButtonTap(_ sender: Any) {
         dataSource.getUsersWithMergedData().observe { promiseReturn in
@@ -57,7 +57,11 @@ class ViewController: UIViewController {
     }
     
     func showUsersRx(_ users:[User]) {
-        
+        DispatchQueue.main.async {
+            let usersVC = UsersTableViewControllerRx()
+            usersVC.users.accept(users)
+            self.navigationController?.pushViewController(usersVC, animated: true)
+        }
     }
     
 }
