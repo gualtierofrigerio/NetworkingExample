@@ -16,12 +16,13 @@ class UsersTableViewControllerRx: UIViewController {
     private let disposeBag = DisposeBag()
     private let tableView = UITableView()
     
-    let users:BehaviorRelay<[User]> = BehaviorRelay(value: [])
+    private let users:BehaviorRelay<[User]> = BehaviorRelay(value: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
         configureSearchViewController()
+        //configureTableViewNoSearch()
     }
     
     func setUsers(_ users:[User]) {
@@ -67,6 +68,21 @@ extension UsersTableViewControllerRx {
                 self?.showUser(user)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func configureTableViewNoSearch() {
+        view.addSubview(tableView)
+        tableView.frame = view.frame
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        
+        users.asObservable()
+            .bind(to: tableView.rx
+            .items(cellIdentifier: cellIdentifier,
+               cellType: UITableViewCell.self)) {
+                row, user, cell in
+                self.configureCell(cell, withUser: user)
+            }
+            .disposed(by:disposeBag)
     }
     
     private func filterUsers(withString filter:String) -> [User] {
