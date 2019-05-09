@@ -59,7 +59,7 @@ class ViewController: UIViewController {
     func showUsersRx(_ users:[User]) {
         DispatchQueue.main.async {
             let usersVC = UsersTableViewControllerRx()
-            usersVC.users.accept(users)
+            usersVC.setUsers(users)
             self.navigationController?.pushViewController(usersVC, animated: true)
         }
     }
