@@ -23,6 +23,10 @@ class UsersTableViewControllerRx: UIViewController {
         configureTableView()
         configureSearchViewController()
     }
+    
+    func setUsers(_ users:[User]) {
+        self.users.accept(users)
+    }
 }
 
 // MARK: - Private
