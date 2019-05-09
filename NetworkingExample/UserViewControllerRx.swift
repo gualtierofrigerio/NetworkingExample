@@ -13,6 +13,11 @@ import UIKit
 struct UserViewModel {
     let username = BehaviorRelay<String>(value:"")
     let email = BehaviorRelay<String>(value:"")
+    
+    func update(withUser user:User) {
+        self.username.accept(user.username)
+        self.email.accept(user.email)
+    }
 }
 
 class UserViewControllerRx: UIViewController {
@@ -26,8 +31,7 @@ class UserViewControllerRx: UIViewController {
     }
     
     func setUser(_ user:User) {
-        viewModel.username.accept(user.username)
-        viewModel.email.accept(user.email)
+        viewModel.update(withUser: user)
     }
 
 }
@@ -70,13 +74,12 @@ extension UserViewControllerRx {
         
         viewModel.username
             .asObservable()
-            .map{$0}
+            .map{$0.uppercased()}
             .bind(to:usernameValue.rx.text)
             .disposed(by:disposeBag)
         
         viewModel.email
             .asObservable()
-            .map{ $0 }
             .bind(to:mailValue.rx.text)
             .disposed(by: disposeBag)
     }
