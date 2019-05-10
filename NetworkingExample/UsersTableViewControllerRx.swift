@@ -46,7 +46,7 @@ extension UsersTableViewControllerRx {
         navigationItem.searchController = searchController
         
         searchController.searchBar.rx.text
-            .bind(onNext: { [weak self] text in
+            .subscribe(onNext: { [weak self] text in
                 self?.filterText.accept(text?.lowercased() ?? "")
             })
             .disposed(by: disposeBag)
