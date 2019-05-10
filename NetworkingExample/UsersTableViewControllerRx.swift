@@ -14,6 +14,7 @@ class UsersTableViewControllerRx: UIViewController {
 
     private let cellIdentifier = "CellIdentifier"
     private let disposeBag = DisposeBag()
+    private let searchController = UISearchController(searchResultsController: nil)
     private let tableView = UITableView()
     
     private var users = [User]()
@@ -22,19 +23,12 @@ class UsersTableViewControllerRx: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        filterText.subscribe(onNext: { [weak self] text in
-            self?.filterUsers(withString: text)
-        }).disposed(by: disposeBag)
-        
-        configureTableView()
-        configureSearchViewController()
-        //configureTableViewNoSearch()
+        initialSetup()
     }
     
     func setUsers(_ users:[User]) {
         self.users = users
-        self.filteredUsers.accept(users)
+        filterText.accept("")
     }
 }
 
@@ -47,7 +41,6 @@ extension UsersTableViewControllerRx {
     }
     
     private func configureSearchViewController() {
-        let searchController = UISearchController(searchResultsController: nil)
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
@@ -81,21 +74,6 @@ extension UsersTableViewControllerRx {
             .disposed(by: disposeBag)
     }
     
-    private func configureTableViewNoSearch() {
-        view.addSubview(tableView)
-        tableView.frame = view.frame
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        
-        filteredUsers.asObservable()
-            .bind(to: tableView.rx
-            .items(cellIdentifier: cellIdentifier,
-               cellType: UITableViewCell.self)) {
-                row, user, cell in
-                self.configureCell(cell, withUser: user)
-            }
-            .disposed(by:disposeBag)
-    }
-    
     @discardableResult private func filterUsers(withString filter:String) -> [User] {
         var filteredUsers = users
         if filter.count > 0 {
@@ -105,6 +83,29 @@ extension UsersTableViewControllerRx {
         }
         self.filteredUsers.accept(filteredUsers)
         return filteredUsers
+    }
+    
+    private func initialSetup() {
+        filterText.subscribe(onNext: { [weak self] text in
+            self?.filterUsers(withString: text)
+        }).disposed(by: disposeBag)
+        
+        configureTableView()
+        configureSearchViewController()
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc private func refreshData(_ sender:Any) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            var newUsers = self.users
+            newUsers.shuffle()
+            self.setUsers(newUsers)
+            self.searchController.searchBar.text = ""
+            self.tableView.refreshControl?.endRefreshing()
+        }
     }
     
     private func showUser(_ user:User) {
