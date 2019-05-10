@@ -16,17 +16,25 @@ class UsersTableViewControllerRx: UIViewController {
     private let disposeBag = DisposeBag()
     private let tableView = UITableView()
     
-    private let users:BehaviorRelay<[User]> = BehaviorRelay(value: [])
+    private var users = [User]()
+    private let filteredUsers:BehaviorRelay<[User]> = BehaviorRelay(value: [])
+    private let filterText:BehaviorRelay<String> = BehaviorRelay<String>(value:"")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        filterText.subscribe(onNext: { [weak self] text in
+            self?.filterUsers(withString: text)
+        }).disposed(by: disposeBag)
+        
         configureTableView()
         configureSearchViewController()
         //configureTableViewNoSearch()
     }
     
     func setUsers(_ users:[User]) {
-        self.users.accept(users)
+        self.users = users
+        self.filteredUsers.accept(users)
     }
 }
 
@@ -45,22 +53,25 @@ extension UsersTableViewControllerRx {
         navigationItem.searchController = searchController
         
         searchController.searchBar.rx.text
-            .asObservable()
-            .map{ $0?.lowercased() ?? ""}
-            .map{ self.filterUsers(withString: $0) }
-            .bind(to: tableView.rx
-            .items(cellIdentifier: cellIdentifier,
-                      cellType: UITableViewCell.self)) {
-                        row, user, cell in
-                        self.configureCell(cell, withUser: user)
-            }
-            .disposed(by:disposeBag)
+            .bind(onNext: { [weak self] text in
+                self?.filterText.accept(text?.lowercased() ?? "")
+            })
+            .disposed(by: disposeBag)
     }
     
     private func configureTableView() {
         view.addSubview(tableView)
         tableView.frame = view.frame
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        
+        filteredUsers.asObservable()
+            .bind(to: tableView.rx
+            .items(cellIdentifier: cellIdentifier,
+                   cellType: UITableViewCell.self)) {
+                    row, user, cell in
+                    self.configureCell(cell, withUser: user)
+            }
+            .disposed(by:disposeBag)
         
         tableView.rx
             .modelSelected(User.self)
@@ -75,7 +86,7 @@ extension UsersTableViewControllerRx {
         tableView.frame = view.frame
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
-        users.asObservable()
+        filteredUsers.asObservable()
             .bind(to: tableView.rx
             .items(cellIdentifier: cellIdentifier,
                cellType: UITableViewCell.self)) {
@@ -85,13 +96,14 @@ extension UsersTableViewControllerRx {
             .disposed(by:disposeBag)
     }
     
-    private func filterUsers(withString filter:String) -> [User] {
-        var filteredUsers = users.value
+    @discardableResult private func filterUsers(withString filter:String) -> [User] {
+        var filteredUsers = users
         if filter.count > 0 {
-            filteredUsers = users.value.filter({
+            filteredUsers = users.filter({
                 return $0.username.lowercased().contains(filter.lowercased())
             })
         }
+        self.filteredUsers.accept(filteredUsers)
         return filteredUsers
     }
     
