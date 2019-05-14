@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     let baseURL = "https://jsonplaceholder.typicode.com"
-    let restClient = RESTHandler()
+    let restClient = RESTHandlerMoya()
     var dataSource:DataSource!
     var dataSourceCallbacks:DataSourceCallbacks!
     
