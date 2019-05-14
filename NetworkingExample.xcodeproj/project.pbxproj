@@ -24,6 +24,8 @@
 		258F85C52265C4360042D63B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F85C42265C4360042D63B /* Errors.swift */; };
 		258F85C82265C7C60042D63B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 258F85C62265C7C60042D63B /* Localizable.strings */; };
 		258F85CB22671D1B0042D63B /* DataHandlerCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F85CA22671D1B0042D63B /* DataHandlerCallbacks.swift */; };
+		2598785A228972AF008AD7B7 /* RESTClientAF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25987859228972AF008AD7B7 /* RESTClientAF.swift */; };
+		2598785C2289A917008AD7B7 /* RESTClientMoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2598785B2289A917008AD7B7 /* RESTClientMoya.swift */; };
 		25AA26BF227AF7A000A958A4 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA26BE227AF7A000A958A4 /* UsersTableViewController.swift */; };
 		ABFF107EC6F1DBE572D800BD /* Pods_NetworkingExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9288D5E26665F5EF20AE1A51 /* Pods_NetworkingExample.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +72,8 @@
 		258F85C72265C7C60042D63B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = NetworkingExample/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		258F85C92265C7CF0042D63B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = NetworkingExample/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		258F85CA22671D1B0042D63B /* DataHandlerCallbacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandlerCallbacks.swift; sourceTree = "<group>"; };
+		25987859228972AF008AD7B7 /* RESTClientAF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClientAF.swift; sourceTree = "<group>"; };
+		2598785B2289A917008AD7B7 /* RESTClientMoya.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClientMoya.swift; sourceTree = "<group>"; };
 		25AA26BE227AF7A000A958A4 /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
 		5BDDBDFC1E63257AEAD3A07B /* Pods-NetworkingExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetworkingExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample.debug.xcconfig"; sourceTree = "<group>"; };
 		9288D5E26665F5EF20AE1A51 /* Pods_NetworkingExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetworkingExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +139,8 @@
 				258F85C42265C4360042D63B /* Errors.swift */,
 				256964A92260C26F00D6F61F /* Promise.swift */,
 				256964A3226081E900D6F61F /* RESTClient.swift */,
+				25987859228972AF008AD7B7 /* RESTClientAF.swift */,
+				2598785B2289A917008AD7B7 /* RESTClientMoya.swift */,
 				25AA26BE227AF7A000A958A4 /* UsersTableViewController.swift */,
 				253B92ED2282FBAC00A92483 /* UsersTableViewControllerRx.swift */,
 				253B92EF2283165300A92483 /* UserViewController.swift */,
@@ -320,11 +326,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
@@ -362,9 +374,11 @@
 				2569647822607C7900D6F61F /* ViewController.swift in Sources */,
 				256964A4226081E900D6F61F /* RESTClient.swift in Sources */,
 				253B92F02283165300A92483 /* UserViewController.swift in Sources */,
+				2598785A228972AF008AD7B7 /* RESTClientAF.swift in Sources */,
 				25AA26BF227AF7A000A958A4 /* UsersTableViewController.swift in Sources */,
 				253B92F222832B5000A92483 /* UserViewControllerRx.swift in Sources */,
 				258F85C52265C4360042D63B /* Errors.swift in Sources */,
+				2598785C2289A917008AD7B7 /* RESTClientMoya.swift in Sources */,
 				256964A622608E2100D6F61F /* DataSource.swift in Sources */,
 				2569647622607C7900D6F61F /* AppDelegate.swift in Sources */,
 				258F85CB22671D1B0042D63B /* DataHandlerCallbacks.swift in Sources */,
