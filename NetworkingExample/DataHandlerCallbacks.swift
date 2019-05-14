@@ -21,21 +21,21 @@ class DataHandlerCallbacks {
 
 extension DataHandlerCallbacks : DataSourceCallbacks {
     func getAlbums(completion: @escaping ([Album]?) -> Void) {
-        getData(forEntityEndpoint: .Albums, withType:[Album].self) { (data) in
+        getData(forEntity: .Album, withType:[Album].self) { (data) in
             let albumData = data as? [Album]
             completion(albumData)
         }
     }
     
     func getPictures(completion: @escaping ([Picture]?) -> Void) {
-        getData(forEntityEndpoint: .Pictures, withType:[Picture].self) { (data) in
+        getData(forEntity: .Picture, withType:[Picture].self) { (data) in
             let pictureData = data as? [Picture]
             completion(pictureData)
         }
     }
     
     func getUsers(completion: @escaping (([User]?) -> Void)) {
-        getData(forEntityEndpoint: .Users, withType:[User].self) { (data) in
+        getData(forEntity: .User, withType:[User].self) { (data) in
             let userData = data as? [User]
             completion(userData)
         }
@@ -64,8 +64,8 @@ extension DataHandlerCallbacks : DataSourceCallbacks {
 
 extension DataHandlerCallbacks {
     
-    private func getData<T>(forEntityEndpoint: EntityEndpoint, withType type:T.Type, completion:@escaping (Decodable?) ->Void) where T:Decodable {
-        guard let url = getUrl(forEntityEndpoint: forEntityEndpoint) else {
+    private func getData<T>(forEntity entity: Entity, withType type:T.Type, completion:@escaping (Decodable?) ->Void) where T:Decodable {
+        guard let url = getUrl(forEntity: entity) else {
             completion(nil)
             return
         }
@@ -79,9 +79,9 @@ extension DataHandlerCallbacks {
         })
     }
     
-    private func getUrl(forEntityEndpoint: EntityEndpoint) -> URL? {
+    private func getUrl(forEntity entity: Entity) -> URL? {
         guard let baseURLString = baseURLString else {return nil}
-        let urlString = baseURLString + forEntityEndpoint.rawValue
+        let urlString = baseURLString + entity.endPoint
         return URL(string: urlString)
     }
 }

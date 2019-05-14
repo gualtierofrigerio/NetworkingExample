@@ -47,10 +47,21 @@ struct User:Codable {
     }
 }
 
-enum EntityEndpoint:String {
-    case Albums = "/albums"
-    case Pictures = "/photos"
-    case Users = "/users"
+enum Entity {
+    case Album
+    case Picture
+    case User
+    
+    var endPoint: String {
+        switch self {
+        case .Album:
+            return "/albums"
+        case .Picture:
+            return "/photos"
+        case .User:
+            return "/users"
+        }
+    }
 }
 
 protocol DataSource {

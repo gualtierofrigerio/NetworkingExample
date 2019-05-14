@@ -24,15 +24,15 @@ class DataHandler {
 extension DataHandler : DataSource {
     
     func getAlbums() -> Promise<[Album]> {
-        return getDataWithPromise(forEntityEndpoint: .Albums, withType: [Album].self)
+        return getDataWithPromise(forEntity: .Album, withType: [Album].self)
     }
     
     func getPictures() -> Promise<[Picture]> {
-        return getDataWithPromise(forEntityEndpoint: .Pictures, withType: [Picture].self)
+        return getDataWithPromise(forEntity: .Picture, withType: [Picture].self)
     }
     
     func getUsers() -> Promise<[User]> {
-        return getDataWithPromise(forEntityEndpoint: .Users, withType: [User].self)
+        return getDataWithPromise(forEntity: .User, withType: [User].self)
     }
     
     func getUsersWithMergedData() -> Promise<[User]> {
@@ -96,9 +96,9 @@ extension DataHandler {
         return newPromise
     }
     
-    private func getDataWithPromise<T>(forEntityEndpoint: EntityEndpoint, withType type:T.Type) -> Promise<T> where T:Decodable {
+    private func getDataWithPromise<T>(forEntity entity: Entity, withType type:T.Type) -> Promise<T> where T:Decodable {
         var promise:Promise<T>
-        guard let url = getUrl(forEntityEndpoint: forEntityEndpoint),
+        guard let url = getUrl(forEntity: entity),
               let restClient = restClient else {
             promise = Promise<T>()
             promise.reject(error: DatasourceErrors.wrongURL)
@@ -110,9 +110,9 @@ extension DataHandler {
         return promise
     }
     
-    private func getUrl(forEntityEndpoint: EntityEndpoint) -> URL? {
+    private func getUrl(forEntity entity: Entity) -> URL? {
         guard let baseURLString = baseURLString else {return nil}
-        let urlString = baseURLString + forEntityEndpoint.rawValue
+        let urlString = baseURLString + entity.endPoint
         return URL(string: urlString)
     }
 }
