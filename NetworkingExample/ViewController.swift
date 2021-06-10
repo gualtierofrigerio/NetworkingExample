@@ -14,6 +14,10 @@ class ViewController: UIViewController {
     let restClient = RESTHandlerMoya()
     var dataSource:DataSource!
     var dataSourceCallbacks:DataSourceCallbacks!
+    @available (iOS 15.0, *)
+    var dataSourceAsync:DataSourceAsync {
+        DataHandlerAsync(withBaseURL: baseURL, restClient: RESTHandler())
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +52,21 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func asyncExampleButtonTap(_ sender: Any) {
+        if #available(iOS 15.0, *) {
+            async {
+                do {
+                    let users = try await dataSourceAsync.getUsersWithMergedData()
+                    self.showUsers(users)
+                } catch {
+                    print("error while getting users async")
+                }
+            }
+        } else {
+            print("sorry, iOS 15 only")
+        }
+    }
+    
     func showUsers(_ users:[User]) {
         DispatchQueue.main.async {
             let usersVC = UsersTableViewController()
@@ -66,7 +85,7 @@ class ViewController: UIViewController {
     
 }
 
-// MARK - Promise
+// MARK: - Promise
 
 extension ViewController {
     func getAlbums() {
@@ -114,7 +133,7 @@ extension ViewController {
     }
 }
 
-// MARK - Callbacks
+// MARK: - Callbacks
 
 extension ViewController {
     
@@ -137,6 +156,16 @@ extension ViewController {
                 self.printUser(user)
             }
         }
+    }
+}
+
+// MARK: - async await
+
+@available (iOS 15.0, *)
+extension ViewController {
+    func getUsers() async throws -> [User] {
+        let users = try await dataSourceAsync.getUsers()
+        return users
     }
 }
 
