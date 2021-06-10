@@ -14,6 +14,13 @@ protocol RESTClient {
 }
 
 class RESTHandler : RESTClient {
+    @available(iOS 15.0, *)
+    func getData(atURL url: URL) async throws -> Data {
+        let request = URLRequest(url: url)
+        let (data, _) = try await URLSession.shared.data(for: request, delegate: nil)
+        return data
+    }
+    
     
     func getData(atURL url: URL, completion: @escaping (Data?) -> Void) {
         let session = URLSession.shared
