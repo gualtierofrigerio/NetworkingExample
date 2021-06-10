@@ -78,6 +78,14 @@ protocol DataSourceCallbacks {
     func getUsersWithMergedData(completion: @escaping ([User]?) -> Void)
 }
 
+@available (iOS 15.0, *)
+protocol DataSourceAsync {
+    func getAlbums() async throws -> [Album]
+    func getPictures() async throws -> [Picture]
+    func getUsers() async throws -> [User]
+    func getUsersWithMergedData() async throws -> [User]
+}
+
 class DataSourceCommon {
     
     class func decodeData<T>(data:Data, type:T.Type) -> Decodable? where T:Decodable {
