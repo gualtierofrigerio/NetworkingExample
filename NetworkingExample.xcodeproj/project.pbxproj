@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,6 +27,7 @@
 		2598785A228972AF008AD7B7 /* RESTClientAF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25987859228972AF008AD7B7 /* RESTClientAF.swift */; };
 		2598785C2289A917008AD7B7 /* RESTClientMoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2598785B2289A917008AD7B7 /* RESTClientMoya.swift */; };
 		25AA26BF227AF7A000A958A4 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AA26BE227AF7A000A958A4 /* UsersTableViewController.swift */; };
+		25BBD7E02672548D0064B2F6 /* DataHandlerAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BBD7DF2672548D0064B2F6 /* DataHandlerAsync.swift */; };
 		ABFF107EC6F1DBE572D800BD /* Pods_NetworkingExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9288D5E26665F5EF20AE1A51 /* Pods_NetworkingExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		25987859228972AF008AD7B7 /* RESTClientAF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClientAF.swift; sourceTree = "<group>"; };
 		2598785B2289A917008AD7B7 /* RESTClientMoya.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClientMoya.swift; sourceTree = "<group>"; };
 		25AA26BE227AF7A000A958A4 /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
+		25BBD7DF2672548D0064B2F6 /* DataHandlerAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandlerAsync.swift; sourceTree = "<group>"; };
 		5BDDBDFC1E63257AEAD3A07B /* Pods-NetworkingExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetworkingExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample.debug.xcconfig"; sourceTree = "<group>"; };
 		9288D5E26665F5EF20AE1A51 /* Pods_NetworkingExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetworkingExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD47FB8E29005C93B6F022A7 /* Pods-NetworkingExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetworkingExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				2569647522607C7900D6F61F /* AppDelegate.swift */,
 				256964A72260923E00D6F61F /* DataHandler.swift */,
+				25BBD7DF2672548D0064B2F6 /* DataHandlerAsync.swift */,
 				258F85CA22671D1B0042D63B /* DataHandlerCallbacks.swift */,
 				256964A522608E2100D6F61F /* DataSource.swift */,
 				258F85C42265C4360042D63B /* Errors.swift */,
@@ -254,18 +257,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = "Gualtiero Frigerio";
 				TargetAttributes = {
 					2569647122607C7900D6F61F = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1300;
 					};
 					2569648522607C7B00D6F61F = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1300;
 						TestTargetID = 2569647122607C7900D6F61F;
 					};
 					2569649022607C7B00D6F61F = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1300;
 						TestTargetID = 2569647122607C7900D6F61F;
 					};
 				};
@@ -324,25 +330,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NetworkingExample/Pods-NetworkingExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AD12451CCA9829C9FD8850BA /* [CP] Check Pods Manifest.lock */ = {
@@ -376,6 +373,7 @@
 				253B92F02283165300A92483 /* UserViewController.swift in Sources */,
 				2598785A228972AF008AD7B7 /* RESTClientAF.swift in Sources */,
 				25AA26BF227AF7A000A958A4 /* UsersTableViewController.swift in Sources */,
+				25BBD7E02672548D0064B2F6 /* DataHandlerAsync.swift in Sources */,
 				253B92F222832B5000A92483 /* UserViewControllerRx.swift in Sources */,
 				258F85C52265C4360042D63B /* Errors.swift in Sources */,
 				2598785C2289A917008AD7B7 /* RESTClientMoya.swift in Sources */,
@@ -473,6 +471,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -534,6 +533,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -576,7 +576,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gfrigerio.NetworkingExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -594,7 +594,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gfrigerio.NetworkingExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -613,7 +613,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gfrigerio.NetworkingExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NetworkingExample.app/NetworkingExample";
 			};
@@ -633,7 +633,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gfrigerio.NetworkingExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NetworkingExample.app/NetworkingExample";
 			};
@@ -652,7 +652,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gfrigerio.NetworkingExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = NetworkingExample;
 			};
@@ -671,7 +671,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gfrigerio.NetworkingExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = NetworkingExample;
 			};
